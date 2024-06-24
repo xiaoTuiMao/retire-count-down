@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 获取当前分支名称
+branch=$(git branch --show-current)
+
+# 只在 main 分支上执行部署
+if [ "$branch" = "main" ]; then
+  echo "Pushing to main branch, running build and deploy..."
+  npm run deploy
+else
+  echo "Not pushing to main, skipping build and deploy..."
+fi
